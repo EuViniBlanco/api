@@ -1,9 +1,9 @@
 def categoriaEntity(item) -> dict:
     return {
-        "id": item["id"],
+        "id": str(item["_id"]),
         "nome": item["nome"],
         "descricao": item["descricao"]
     }
 
 def categoriasEntity(entity) -> list:
-    [categoriaEntity(item) for item in entity]
+    return [categoriaEntity(item) for item in entity]

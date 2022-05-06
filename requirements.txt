@@ -1,0 +1,6 @@
+python==3.10.4
+anaconda==4.10.3
+fastapi==0.1.0
+pydantic==1.8.2
+mongodb==5.0.8
+uvicorn
