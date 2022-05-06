@@ -1,5 +1,6 @@
-# api
+# FastAPI - Python, MongoDB e Docker
 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%40viniciusblanco-blue)](https://www.linkedin.com/in/viniciusblanco/)
 ### Install FastAPI
 ```
 pip install "fastapi[all]"
