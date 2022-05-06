@@ -1,9 +1,11 @@
 # FastAPI - Python, MongoDB e Docker
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%40viniciusblanco-blue)](https://www.linkedin.com/in/viniciusblanco/)
-### Install FastAPI
+
+Versões utilizadas no projeto [aqui](https://github.com/EuViniBlanco/api/blob/main/requirements.txt)
+### Instalando FastAPI
 ```
-pip install "fastapi[all]"
+pip install "fastapi"
 ```
 
 You can also install it part by part.
@@ -17,7 +19,7 @@ Also install uvicorn to work as the server:
 
 
 ```
-pip install "uvicorn[standard]"
+pip install "uvicorn"
 ```
 
 ## what is uvicorn ?
@@ -34,7 +36,7 @@ uvicorn app:app --port 8086 --reload
 ## Acessar a API via FastAPI
 http://localhost:8086/
 
-Para acessar o teste da API, basta acessar `\docs`:
+Para acessar o teste da API, basta acessar `/docs`:
 
 http://localhost:8086/docs
 

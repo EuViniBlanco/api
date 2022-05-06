@@ -33,7 +33,7 @@ def create_categoria(categoria: Categoria):
 
 @app_route.get('/categoria/{id}', response_model=Categoria, tags=['Categoria'])
 def find_categoria(id: str):
-    if not id:
+    if not ObjectId.is_valid(id):
         raise HTTPException(status_code=404, detail="Categoria não encontrada")
     else:
         return categoriaEntity(con.local.categoria.find_one({"_id": ObjectId(id)}))
