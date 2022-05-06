@@ -42,7 +42,6 @@ http://localhost:8086/docs
 
 # Estrutura do Projeto:
 ## models:
-All database related files
 [Todos arquivos de models aqui](https://github.com/EuViniBlanco/api/tree/main/models)
 
 ## schemas:
