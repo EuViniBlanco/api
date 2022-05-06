@@ -49,5 +49,5 @@ http://localhost:8086/docs
 ## schemas:
 [Todos arquivos de Schemas aqui](https://github.com/EuViniBlanco/api/tree/main/schemas)
 
-## routes
+## routes:
 [Todos endpoints aqui](https://github.com/EuViniBlanco/api/tree/main/routes)
