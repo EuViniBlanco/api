@@ -4,4 +4,4 @@ from docs import tags_metadata
 
 app = FastAPI()
 
-app.include_router(app_route)
+app.include_router(app_route, prefix="/api/v1")

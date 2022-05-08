@@ -6,8 +6,8 @@ class Produto(BaseModel):
     id: Optional[str]
     nome: str
     descricao: str
-    preco: float
-    categoria: Categoria
+    preco: float 
+    categoria: Categoria = None
     
 class Config:
     orm_mode = True

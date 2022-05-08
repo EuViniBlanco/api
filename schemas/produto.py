@@ -4,6 +4,7 @@ def produtoEntity(item) -> dict:
         "nome": item["nome"],
         "descricao": item["descricao"],
         "preco": item["preco"],
+        "categoria": item["categoria"] if item["categoria"] else None # type: ignore
     }
 
 def produtosEntity(entity) -> list:
