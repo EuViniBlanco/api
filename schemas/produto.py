@@ -3,8 +3,7 @@ def produtoEntity(item) -> dict:
         "id": str(item["_id"]),
         "nome": item["nome"],
         "descricao": item["descricao"],
-        "preco": item["preco"],
-        "categoria": item["categoria"] if item["categoria"] else None # type: ignore
+        "categoria": item["categoria"]
     }
 
 def produtosEntity(entity) -> list:

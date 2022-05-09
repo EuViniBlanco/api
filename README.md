@@ -3,43 +3,44 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%40viniciusblanco-blue)](https://www.linkedin.com/in/viniciusblanco/)
 
 Versões utilizadas no projeto [aqui](https://github.com/EuViniBlanco/api/blob/main/requirements.txt)
+
+### Instale o Anaconda
+
+Link para baixar [aqui](https://www.anaconda.com/products/distribution)
+### Instalando o ambiente virtual com a versão utilizada do python
+```
+conda create --name api-mongo python=3.10.4
+```
+
+Agora, deve-se ativar o ambiente virtual criado como ambiente principal
+```
+conda activate api-mongo
+```
 ### Instalando FastAPI
-```
-pip install "fastapi"
-```
-
-You can also install it part by part.
-
-This is what you would probably do once you want to deploy your application to production:
 
 ```
 pip install fastapi
 ```
-Also install uvicorn to work as the server:
+Instale o uvicorn para trabalhar como nosso servidor:
 
 
 ```
-pip install "uvicorn"
+pip install uvicorn
 ```
-
-## what is uvicorn ?
-Uvicorn is a lightning-fast ASGI server implementation, using uvloop and httptools.
-
-## What is pydentic model
-You can think of models as similar to types in strictly typed languages, or as the requirements of a single endpoint in an API.
 
 ## Iniciar server 
 ```
 uvicorn app:app --port 8086 --reload
 ```
-
+Escolhi aqui a porta `:8086` para evitar conflitos com o sistema operacional, e o argumento `--reload` para poder sempre testar a API sem precisar matar o serviço do server e iniciar novamente
 ## Acessar a API via FastAPI
-http://localhost:8086/
+http://localhost:8086/api/v1
 
 Para acessar o teste da API, basta acessar `/docs`:
 
-http://localhost:8086/docs
+http://localhost:8086/api/v1docs
 
+Os endpoints utilizados foram `/cadastro` (ou `/cadastros`) e `/produto` (ou `/produtos`)
 
 
 # Estrutura do Projeto:

@@ -2,7 +2,6 @@ from fastapi import APIRouter, status, Response, HTTPException
 from config.db import con
 from bson import ObjectId
 from starlette.status import HTTP_204_NO_CONTENT
-import json
 
 
 from models.categoria import Categoria
@@ -14,9 +13,9 @@ from schemas.produto import produtoEntity, produtosEntity
 
 app_route = APIRouter()
 
-@app_route.get('/', tags=['Home'])
+@app_route.get('/', tags=['Index'])
 def root():
-    return {"message": "Olá"}
+    return {"message": "Olá Irroba!"}
 
 ##  Rotas de Categoria  ##
 
@@ -60,52 +59,36 @@ def delete_categoria(id: str):
 
 @app_route.get('/produtos', response_model=list[Produto], tags=['Produto'])
 def find_all_produtos():
-    return produtosEntity(con.local.produto.find())
-
+        return produtosEntity(con.local.produto.find())
+    
 @app_route.post('/produto', response_model=Produto, tags=['Produto'])
 def create_produto(produto: Produto):
-    new_produto = dict(produto.categoria_id)
-    del new_produto["id", "categoria_id"]
+    new_produto = dict(produto, _id=ObjectId())
+    del new_produto["id"] 
+    #del new_produto["categoria"]
     id = con.local.produto.insert_one(new_produto).inserted_id
-    return produtoEntity(con.local.produto.find_one({"_id": id, "categoria_id": ObjectId(produto.categoria_id)}))
+    return produtoEntity(con.local.produto.find_one({"_id": id}))
 
 @app_route.get('/produto/{id}', response_model=Produto, tags=['Produto'])
 def find_produto(id: str):
-    return produtoEntity(con.local.produto.find_one({"_id": ObjectId(id)}))
-
+    if not ObjectId.is_valid(id):
+        raise HTTPException(status_code=404, detail="Produto não encontrado")
+    else:
+        return produtoEntity(con.local.produto.find_one({"_id": ObjectId(id)}))
+    
 @app_route.put('/produto/{id}', response_model=Produto, tags=['Produto'])
 def update_produto(id: str, produto: Produto):
-    con.local.produto.find_one_and_update(
-        {"_id": ObjectId(id)}, {"$set": dict(produto)})
-    return produtoEntity(con.local.produto.find_one({"_id": ObjectId(id)}))
-
+    if not produto:
+        raise HTTPException(status_code=404, detail="Produto não encontrado")
+    else:
+        con.local.produto.find_one_and_update(
+            {"_id": ObjectId(id)}, {"$set": dict(produto)})
+        return produtoEntity(con.local.produto.find_one({"_id": ObjectId(id)}))
+    
 @app_route.delete('/produto/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=['Produto'])
 def delete_produto(id: str):
-    produtoEntity(con.local.produto.find_one_and_delete({"_id": ObjectId(id)}))
-    return Response(status_code=HTTP_204_NO_CONTENT)
-
-
-
-#testes
-
-@app_route.get('/produto/{id}/categoria', response_model=Categoria, tags=['teste'])
-def find_categoria_produto(id: str):
-    return categoriaEntity(con.local.categoria.find_one({"_id": ObjectId(con.local.produto.find_one({"_id": ObjectId(id)})["categoria_id"])}))
-
-@app_route.post('/produto/{id}/categoria', response_model=Categoria, tags=['teste'])
-def update_categoria_produto(id: str, categoria: Categoria):
-    con.local.produto.find_one_and_update(
-        {"_id": ObjectId(id)}, {"$set": {"categoria_id": ObjectId(categoria.id)}})
-    return categoriaEntity(con.local.categoria.find_one({"_id": ObjectId(categoria.id)}))
-
-@app_route.get('/category/{id}/produtos', response_model=list[Produto], tags=['teste'])
-def find_produtos_categoria(id: str):
-    return produtosEntity(con.local.produto.find({"categoria_id": ObjectId(id)}))
-
-
-@app_route.post('/categoria{id}/produto', response_model=Produto, tags=['teste'])
-def create_produto_categoria(id: str, produto: Produto):
-    new_produto = dict(produto.categoria)
-    del new_produto["id"]
-    id = con.local.produto.insert_one(new_produto).inserted_id
-    return produtoEntity(con.local.produto.find_one({"_id": id, "categoria_id": ObjectId(produto.categoria)}))
+    if not con.local.produto.find_one({"_id": ObjectId(id)}):
+        raise HTTPException(status_code=404, detail="Produto não encontrado")
+    else:
+        produtoEntity(con.local.produto.find_one_and_delete({"_id": ObjectId(id)}))
+        return Response(status_code=HTTP_204_NO_CONTENT, content="Produto deletado")
