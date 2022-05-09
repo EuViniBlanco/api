@@ -4,7 +4,4 @@ tags_metadata = [{
 },{
     "name": "produto",
     "description": "Produtos por categoria"
-}]
-
-
-
+}] #Tags para a documentação do swagger (docs)

@@ -1,4 +1,4 @@
-def produtoEntity(item) -> dict:
+def produtoEntity(item) -> dict: #Retorna um dicionario para o produto
     return {
         "id": str(item["_id"]),
         "nome": item["nome"],

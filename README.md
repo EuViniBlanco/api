@@ -34,13 +34,15 @@ uvicorn app:app --port 8086 --reload
 ```
 Escolhi aqui a porta `:8086` para evitar conflitos com o sistema operacional, e o argumento `--reload` para poder sempre testar a API sem precisar matar o serviço do server e iniciar novamente
 ## Acessar a API via FastAPI
-http://localhost:8086/api/v1
+`*` http://localhost:8086/api/v1
 
-Para acessar o teste da API, basta acessar `/docs`:
+Para acessar o teste da API, basta acessar o Swagger (`/docs`):
 
-http://localhost:8086/api/v1docs
+`*` http://localhost:8086/api/v1/docs
 
 Os endpoints utilizados foram `/cadastro` (ou `/cadastros`) e `/produto` (ou `/produtos`)
+
+`*`Obs.: caso execute a aplicação em um servidor web, trocar localhost pelo endereço de IP externo ou DNS
 
 
 # Estrutura do Projeto:

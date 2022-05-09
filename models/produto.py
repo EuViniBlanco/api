@@ -1,7 +1,5 @@
 from typing import Optional
-from pydantic import BaseModel, Field
-from models.categoria import Categoria
-from schemas.categoria import categoriaEntity
+from pydantic import BaseModel
 
 class Produto(BaseModel):
     id: Optional[str]
